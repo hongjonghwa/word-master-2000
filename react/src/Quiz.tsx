@@ -34,9 +34,11 @@ function Test() {
   const handleClickGenerate = () => {
     const endNo = end * 40;
     const startNo = (start-1)*40;
-    const probs  = dict.slice(0, endNo);
-    for (let i = startNo, c = 0 ; i < endNo && c < 40 ; c++){
-      const j = getRandomInt(i, endNo)
+    const l = endNo - startNo;
+
+    const probs  = dict.slice(startNo, endNo);
+    for (let i = 0; i < 40 ; i++){
+      const j = getRandomInt(i, l)
       const tmp = probs[i];
       probs[i] = probs[j];
       probs[j] = tmp;
@@ -59,13 +61,17 @@ function Test() {
         <input type="button" value="문제 출제!" onClick= {handleClickGenerate}/>
         
       </div>
-      <div className="Quiz-page" style={{pageBreakAfter:'always'}}>
-        <div>{problems.map(dic=>Problem(dic))}</div>
-      </div>
-      <div className="pagebreak"></div>
-      <div className="Quiz-page">
-        <div>{problems.map(dic=>Answer(dic))}</div>
-      </div>
+      {problems.length>0 &&
+        <>
+          <div className="Quiz-page">
+            <div>{problems.map(dic=>Problem(dic))}</div>
+          </div>
+          <div className="pagebreak"></div>
+          <div className="Quiz-page">
+            <div>{problems.map(dic=>Answer(dic))}</div>
+          </div>
+        </>
+      }
     </>
   );
 }
