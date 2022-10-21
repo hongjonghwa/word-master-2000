@@ -12,6 +12,12 @@ function getRandomInt(min: number, max:number) {
   return Math.floor(Math.random() * (max-min))+min;
 }
 
+function speech (text:string){
+  const utterance = new SpeechSynthesisUtterance(text)
+  utterance.lang = 'en-US';
+  speechSynthesis.speak(utterance)
+}
+
 
 function Test() {
   const [start, setStart] = useState(1);
@@ -83,9 +89,12 @@ function Problem(dic: Dict) {
   if (!dic) return
   // if (!props || !props.no) return
   return <>
-      <div style={{float:'left',width:'22%',height:'4.5vh',textAlign:'left', fontSize:24}} key={dic.no+'_1'}>{(dic['word'])}</div>
-      <div style={{float:'left',width:'23%',height:'4.5vh',textAlign:'left', fontSize:16, color:'#ffcc55'}} key={dic.no+'_2'}>
-
+      <div style={{float:'left',width:'22%',height:'4.5vh',textAlign:'left', fontSize:24}} key={dic.no+'_1'}>
+        {dic['word']}
+        {/* dic['word'].replace(/./g, "*") */}
+      </div>
+      <div style={{float:'left',width:'23%',height:'4.5vh',textAlign:'left', fontSize:16, color:'#ffcc55', cursor:'pointer'}} key={dic.no+'_2'}>
+        <span style={{cursor:'pointer'}} onClick={()=>speech(dic['word'])}>&#128172;</span>
       </div>
       <div style={{float:'left',width:'5%',height:'4.5vh',textAlign:'left'}} key={dic.no} />
     </>

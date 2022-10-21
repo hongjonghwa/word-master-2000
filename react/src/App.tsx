@@ -1,9 +1,12 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
 import Quiz from './Quiz'
 
 function App() {
+
+  // TODO : QuizPrint, Listening - word 
+  const [nav, setNav] = useState<string>('QuizSheet')
+
   return (
     <div className="App">
       <header className="App-header noprint">
@@ -19,7 +22,8 @@ function App() {
 
       </header>
       <div className="App-body">
-        <Quiz></Quiz>
+        {nav === 'QuizSheet' && <Quiz></Quiz>}
+        {nav === 'QuizSheet1' || <Quiz></Quiz>}
       </div>
     </div>
   );
